@@ -2,7 +2,7 @@
 var GAH = GAH || {};
 GAH.locationAnalytics=(function(){
 	var init=function(gaq, onNoSupportFunc){
-		var cookieSetting="HLA=1"
+		var cookieSetting="HGLA=1"
 			doesntSupportFunc=onNoSupportFunc || function(){ document.cookie=cookieSetting; }
 			,shouldTest=true
 			,i=0
@@ -11,7 +11,7 @@ GAH.locationAnalytics=(function(){
 			if(document.cookie){
 				len=document.cookie.length;
 				for(;i<len;i+=1){
-					if(document.cookie[i].indexOf("HLA=")){
+					if(document.cookie[i].indexOf("HLA=")!==-1){
 						shouldTest=false;
 					}
 				}
