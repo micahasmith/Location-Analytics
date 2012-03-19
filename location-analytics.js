@@ -1,4 +1,3 @@
-
 var GAH = GAH || {};
 GAH.locationAnalytics=(function(){
 	var init=function(gaq, onNoSupportFunc){
@@ -6,12 +5,13 @@ GAH.locationAnalytics=(function(){
 			doesntSupportFunc=onNoSupportFunc || function(){ document.cookie=cookieSetting; }
 			,shouldTest=true
 			,i=0
-			,len=0;
+			,len=0
+			,geo="";
 		if(typeof gaq!=='undefined'){
 			if(document.cookie){
 				len=document.cookie.length;
 				for(;i<len;i+=1){
-					if(document.cookie[i].indexOf("HLA=")!==-1){
+					if(document.cookie[i].indexOf("HLA2=")!==-1){
 						shouldTest=false;
 					}
 				}
@@ -19,8 +19,8 @@ GAH.locationAnalytics=(function(){
 			if(shouldTest){
 				if(navigator.geolocation){
 					navigator.geolocation.getCurrentPosition(function(position){
-						gaq.push(['_setCustomVar',1,"Visitor_GeoLocation_Long",position.coords.longitude,1]);
-						gaq.push(['_setCustomVar',2,"Visitor_GeoLocation_Lat",position.coords.latitude,1]);
+						geo=position.coords.longitude.toString()+","+position.coords.latitude;
+						gaq.push(['_setCustomVar',1,"Visitor_GeoLocation",geo,1]);
 						document.cookie=cookieSetting;
 					},function(){
 						doesntSupportFunc();
