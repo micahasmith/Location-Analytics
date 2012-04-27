@@ -1,6 +1,6 @@
 var GAH = GAH || {};
 GAH.locationAnalytics=(function(){
-	var init=function(onNoSupportFunc,cb){
+	var init=function(cb,onNoSupportFunc){
 		var cookieSetting="HGLA3=1"
 			doesntSupportFunc=onNoSupportFunc || function(){ document.cookie=cookieSetting; }
 			,shouldTest=true
@@ -9,12 +9,9 @@ GAH.locationAnalytics=(function(){
 			,geo="";
 		
 			if(document.cookie){
-				len=document.cookie.length;
-				for(;i<len;i+=1){
-					if(document.cookie[i].indexOf("HGLA3=")!==-1){
+					if(document.cookie.indexOf("HGLA3=")!==-1){
 						shouldTest=false;
 					}
-				}
 			}
 			if(shouldTest){
 				if(navigator.geolocation){

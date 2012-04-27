@@ -11,7 +11,14 @@
 			
 			window.onload=function(){
 				var fakegaq={push:function(){console.log(arguments);}};
-				GAH.locationAnalytics.init(fakegaq);
+
+				GAH.locationAnalytics.init(function(status,geo){
+					if(status==='success'){
+						fakegaq.push(['_setCustomVar',5,"Visitor_GeoLocation",geo,1]);
+					}else {
+						fakegaq.push(['_setCustomVar',5,"Visitor_GeoLocation",status,1]);
+					}
+				});
 			};
 		</script>
 	</body>
